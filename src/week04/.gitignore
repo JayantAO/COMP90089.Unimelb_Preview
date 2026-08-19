@@ -1,0 +1,26 @@
+# Patient-level and database material stays on the development machine.
+data/
+databases/
+private/
+outputs/
+
+*.csv
+*.csv.gz
+*.parquet
+*.db
+*.sqlite
+*.sqlite3
+*.duckdb
+*.sql.gz
+
+# Credentials and local environment configuration.
+.env
+.env.*
+*credentials*.json
+*service-account*.json
+
+# Notebook/runtime artefacts.
+.ipynb_checkpoints/
+__pycache__/
+*-executed.ipynb
+

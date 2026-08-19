@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>COMP90089 Week 2–3 Tutorial 学习指南</title>
+  <style>
+    :root {
+      --ink:#18222f; --muted:#617083; --paper:#f5f2eb; --card:#fffdf9;
+      --purple:#51247a; --purple2:#76509a; --teal:#0f766e; --blue:#245a87;
+      --amber:#b45309; --red:#b42318; --line:#ded8cd; --shadow:0 12px 34px rgba(25,31,40,.09);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:var(--paper);font:16px/1.72 Inter,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+    a{color:var(--purple)} code{font-family:"Cascadia Code",Consolas,monospace;background:#eee9f2;padding:.12em .35em;border-radius:5px;font-size:.92em}
+    .hero{background:linear-gradient(125deg,#29123f 0%,#51247a 58%,#6e3e96 100%);color:white;padding:64px 7vw 58px;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;width:430px;height:430px;border:1px solid rgba(255,255,255,.15);border-radius:50%;right:-110px;top:-190px;box-shadow:0 0 0 65px rgba(255,255,255,.035),0 0 0 130px rgba(255,255,255,.025)}
+    .eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;color:#e2d4ee;font-weight:700}.hero h1{font-size:clamp(2.2rem,5vw,4.35rem);line-height:1.06;margin:.35rem 0 1rem;max-width:960px}.hero p{max-width:840px;font-size:1.12rem;color:#eee4f4;margin:0}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.pill{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.09);padding:6px 12px;border-radius:999px;font-size:.88rem}
+    .layout{display:grid;grid-template-columns:270px minmax(0,920px);gap:38px;max-width:1260px;margin:0 auto;padding:38px 28px 90px}
+    nav{position:sticky;top:22px;align-self:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}nav strong{display:block;color:var(--purple);margin-bottom:9px}nav a{display:block;text-decoration:none;padding:6px 0;color:#465466;font-size:.92rem}nav a:hover{color:var(--purple)}
+    main{min-width:0} section{scroll-margin-top:24px;margin-bottom:48px}h2{font-size:1.85rem;line-height:1.25;margin:0 0 18px;color:#2e1645}h3{font-size:1.2rem;margin:26px 0 10px;color:#3d2751}p{margin:.55rem 0 1rem}.lead{font-size:1.12rem;color:#465466}
+    .card,.callout{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.week{border-top:5px solid var(--purple)}.week.teal{border-color:var(--teal)}.week h3{margin-top:0;font-size:1.35rem}.big{font-size:2.2rem;line-height:1;color:var(--purple);font-weight:800}.teal .big{color:var(--teal)}
+    .callout{box-shadow:none;border-left:5px solid var(--blue);margin:18px 0}.callout.warn{border-left-color:var(--amber);background:#fff9ed}.callout.danger{border-left-color:var(--red);background:#fff5f3}.callout.good{border-left-color:var(--teal);background:#effaf7}.callout strong{display:block;margin-bottom:4px}
+    ul,ol{padding-left:1.35rem}li{margin:.42rem 0}.checklist{list-style:none;padding:0;counter-reset:item}.checklist li{counter-increment:item;position:relative;padding:14px 14px 14px 52px;background:#faf8f3;border:1px solid var(--line);border-radius:12px;margin:10px 0}.checklist li:before{content:counter(item);position:absolute;left:14px;top:14px;width:27px;height:27px;border-radius:50%;background:var(--purple);color:#fff;text-align:center;line-height:27px;font-weight:700}.teal-list li:before{background:var(--teal)}
+    table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:.94rem}th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#ede7f2;color:#381b50}tr:last-child td{border-bottom:0}.table-wrap{overflow:auto;border-radius:14px}
+    .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin:18px 0}.node{flex:1 1 150px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px;text-align:center;box-shadow:0 5px 18px rgba(20,30,40,.05)}.node b{display:block;color:var(--purple)}.arrow{align-self:center;color:var(--purple);font-weight:900;font-size:1.4rem}
+    .tag{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.02em;padding:3px 8px;border-radius:999px;background:#eae1f1;color:#4a246a;margin-right:5px}.tag.red{background:#fee4e2;color:#9d2017}.tag.green{background:#dff5ef;color:#09665e}
+    .mistakes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mistake{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}.mistake b{color:var(--red);display:block}.mistake span{display:block;color:var(--teal);margin-top:6px}
+    details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:12px 16px}summary{cursor:pointer;font-weight:700;color:#402256}.file-list{columns:2;column-gap:28px;font-family:"Cascadia Code",Consolas,monospace;font-size:.86rem}.file-list div{break-inside:avoid;padding:3px 0}
+    footer{background:#20142d;color:#dcd1e5;padding:30px 7vw;font-size:.9rem}footer a{color:#fff}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}nav{position:relative;top:0}.grid2,.grid3,.mistakes{grid-template-columns:1fr}.file-list{columns:1}.hero{padding:48px 25px}.layout{padding:26px 18px 70px}.arrow{display:none}}
+    @media print{nav{display:none}.layout{display:block;max-width:none}.hero{padding:30px;color:#000;background:#eee}.hero p,.eyebrow{color:#333}.card,.callout{box-shadow:none}section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">COMP90089 · Machine Learning Applications in Health</div>
+    <h1>Week 2–3 Tutorial<br>任务与知识地图</h1>
+    <p>从“认识 MIMIC-IV 的患者—住院—ICU 层级”，走到“定位临床数据、连接字典表、识别真实世界医疗数据质量问题”。</p>
+    <div class="meta"><span class="pill">依据 Ed 中 Week 2 全部文件</span><span class="pill">依据 Week 3 mimic-data-types.ipynb</span><span class="pill">整理日期：2026-08-12</span></div>
+  </header>
+
+  <div class="layout">
+    <nav aria-label="目录">
+      <strong>快速目录</strong>
+      <a href="#overview">两周主线</a><a href="#week2">Week 2 要完成什么</a><a href="#week3">Week 3 要完成什么</a>
+      <a href="#ids">关键 ID 与数据粒度</a><a href="#tables">表与字典表</a><a href="#quality">数据质量</a>
+      <a href="#mistakes">重点与易错点</a><a href="#extension">扩展理解</a><a href="#files">文件清单</a><a href="#final">最终自检</a>
+    </nav>
+
+    <main>
+      <section id="overview">
+        <h2>两周到底在训练什么？</h2>
+        <p class="lead">它们共同训练的不是“记住很多表名”，而是建立一套可靠的临床数据库分析方法：先确定分析单位和时间点，再找对表、用正确 ID 连接，最后判断数据是否可信、是否在预测时已经可用。</p>
+        <div class="grid2">
+          <article class="card week"><div class="big">W2</div><h3>建立数据地图</h3><p>连接 BigQuery；从 <code>patients</code>、<code>admissions</code>、<code>transfers</code> 重建一名患者的多次住院和院内移动。</p></article>
+          <article class="card week teal"><div class="big">W3</div><h3>进入临床事件</h3><p>用 <code>stay_id</code> 进入 ICU 数据；理解诊断、化验、用药、生命体征等数据，并识别缺失、异常和单位错误。</p></article>
+        </div>
+        <div class="flow" aria-label="学习主线">
+          <div class="node"><b>Patient</b><code>subject_id</code></div><div class="arrow">→</div>
+          <div class="node"><b>Admission</b><code>hadm_id</code></div><div class="arrow">→</div>
+          <div class="node"><b>ICU stay</b><code>stay_id</code></div><div class="arrow">→</div>
+          <div class="node"><b>Clinical events</b><code>itemid</code> + time</div>
+        </div>
+      </section>
+
+      <section id="week2">
+        <h2>Week 2：需要完成的任务</h2>
+        <p>Ed 中有两份 Notebook。<code>how-to-bigquery.ipynb</code> 用于配置正式访问；<code>first-look-at-mimic.ipynb</code> 可在 Ed 中使用 Demo 数据运行，是本周核心练习。</p>
+        <h3>A. BigQuery 连接练习</h3>
+        <ol class="checklist">
+          <li><b>先完成访问前置条件：</b>PhysioNet credentialing、指定培训、各数据集 DUA、Google Cloud 账户关联和 BigQuery project。</li>
+          <li><b>设置 <code>project_id</code>：</b>这是你发起查询并承担查询费用的 Google Cloud 项目，不是 MIMIC 数据集名称。</li>
+          <li><b>理解数据集路径：</b>Notebook 用 <code>mimic_demo_core</code> 测试；完整 hospital 模块示例为 <code>mimiciv_3_1_hosp</code>。</li>
+          <li><b>运行最小查询：</b>从 <code>physionet-data.{dataset}.patients</code> 读取少量行，确认权限、项目和 SQL 都有效。</li>
+          <li><b>掌握流程：</b><code>SQL → BigQuery → pandas_gbq.read_gbq() → DataFrame</code>。正式项目优先云端筛选，不下载整库。</li>
+        </ol>
+        <h3>B. First look at MIMIC-IV</h3>
+        <ol class="checklist">
+          <li><b>加载三张基础表：</b><code>patients</code>、<code>admissions</code>、<code>transfers</code>，并把时间列解析为 datetime。</li>
+          <li><b>选择示例患者：</b>用 <code>subject_id</code> 过滤一名患者；理解性别、<code>anchor_age</code>、<code>anchor_year</code> 和去标识化时间锚点。</li>
+          <li><b>检查年龄分布：</b>按 <code>anchor_age</code> 分组画图，解释为什么 91 岁处出现堆积。</li>
+          <li><b>查看全部住院：</b>按 <code>admittime</code> 排序，理解“一人多次住院”，并画出每次入院—出院的时间线。</li>
+          <li><b>统计入院来源：</b>对 <code>admission_location</code> 分组计数，注意统计的是住院次数而非独立患者数。</li>
+          <li><b>重建院内移动：</b>选最早一次 <code>hadm_id</code>，读取其 <code>transfers</code>，观察 ED、普通病房和出院顺序。</li>
+          <li><b>识别含 ICU 的住院：</b>先用 ICU careunit 找到相应 <code>hadm_id</code>，再取该住院的全部 transfer，画出完整路径。</li>
+          <li><b>回到 admission 层解释结局：</b>检查入院类型、来源和 discharge location。可选扩展：更换 <code>subject_id</code>，观察并非每个患者每张表都有记录。</li>
+        </ol>
+        <div class="callout good"><strong>Week 2 完成标准</strong>你能用一句话解释三张表各“一行代表什么”，能从 <code>subject_id</code> 找到全部住院，再从一个 <code>hadm_id</code> 重建院内路径；同时能把基本 Pandas 操作翻译成等价 SQL。</div>
+      </section>
+
+      <section id="week3">
+        <h2>Week 3：需要完成的任务</h2>
+        <p>本周只有核心 Notebook <code>mimic-data-types.ipynb</code>。其中若干代码单元保留了待补全部分；任务是按照上方 SQL 和注释写出等价 Pandas，而不是只阅读最终文字。</p>
+        <ol class="checklist teal-list">
+          <li><b>从 admission 找 ICU encounter：</b>加载 <code>icustays</code>，按 Week 2 的 <code>hadm_id</code> 过滤并取得 <code>stay_id</code>。比较 <code>transfers</code> 的多行床位移动和 <code>icustays</code> 的单个 ICU encounter。</li>
+          <li><b>建立模块地图：</b>区分 hospital-wide 的 <code>hosp</code> 与 ICU clinical information system 的 <code>icu</code>。</li>
+          <li><b>补全诊断连接：</b>按 <code>hadm_id</code> 过滤 <code>diagnoses_icd</code>，再与 <code>d_icd_diagnoses</code> 同时按 <code>icd_code + icd_version</code> 连接，按 <code>seq_num</code> 排序。</li>
+          <li><b>补全操作连接：</b>用同样模式连接 <code>procedures_icd</code> 与 <code>d_icd_procedures</code>，理解 billing procedure 与实时治疗记录的区别。</li>
+          <li><b>补全化验连接：</b>按 admission 过滤 <code>labevents</code>，通过 <code>itemid</code> 连接 <code>d_labitems</code>；理解 <code>specimen_id</code>、fluid、label、<code>valuenum</code> 和时间序列。</li>
+          <li><b>完成 OMR 数据质量练习：</b>读取身高体重；把字符串转数值；统计缺失覆盖；用 IQR 标记异常；调查同一患者体重的单位不一致。</li>
+          <li><b>补全微生物查询：</b>按 <code>subject_id</code> 查看跨记录结果，认识有些记录不属于当前 <code>hadm_id</code>，甚至没有 admission ID。</li>
+          <li><b>补全处方查询：</b>读取 <code>prescriptions</code> 并按 <code>starttime</code> 排序；区分“医嘱意图”与 pharmacy dispensing、eMAR administration。</li>
+          <li><b>补全 ICU chart 查询：</b>按 <code>stay_id</code> 过滤 <code>chartevents</code>，通过 <code>itemid</code> 连接 <code>d_items</code>，绘制心率、呼吸率和无创血压。</li>
+          <li><b>认识其他 ICU events：</b>解释 <code>datetimeevents</code>、<code>inputevents</code>、<code>outputevents</code>、<code>procedureevents</code> 的事件语义和时间形式。</li>
+        </ol>
+        <div class="callout good"><strong>Week 3 完成标准</strong>看到一个研究变量时，你能判断应该去 <code>hosp</code> 还是 <code>icu</code>，应使用哪个 ID、连接哪张 <code>d_</code> 字典表，并在分析前主动检查 dtype、缺失、极端值和单位。</div>
+      </section>
+
+      <section id="ids">
+        <h2>最关键的知识：ID 决定数据粒度</h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>ID</th><th>表示什么</th><th>典型使用</th><th>常见错误</th></tr></thead>
+          <tbody>
+            <tr><td><code>subject_id</code></td><td>一名去标识化患者</td><td>跨住院追踪患者；按患者拆分训练/测试</td><td>用它替代 <code>hadm_id</code>，把多次住院混在一起</td></tr>
+            <tr><td><code>hadm_id</code></td><td>一次 hospital admission</td><td>诊断、住院化验、处方、transfer</td><td>认为所有 hosp 记录都必然有或属于当前 admission</td></tr>
+            <tr><td><code>stay_id</code></td><td>一次合并后的 ICU encounter</td><td>连接 <code>chartevents</code> 等 ICU 表</td><td>把一次床位 transfer 当成一次独立 ICU stay</td></tr>
+            <tr><td><code>itemid</code></td><td>某个测量/治疗概念</td><td>连接 <code>d_items</code> 或 <code>d_labitems</code></td><td>直接按 label 连接，忽略重名或 fluid 差异</td></tr>
+            <tr><td><code>specimen_id</code></td><td>一份检验标本</td><td>识别同一次抽血/采样产生的多项化验</td><td>把每个 lab row 都当成独立采样</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout"><strong>建模时先写清楚 observation unit</strong>模型的一行究竟是一名患者、一次住院、一次 ICU stay，还是一个时间窗口？这个选择决定去重、标签、特征聚合和数据集切分方式。</div>
+      </section>
+
+      <section id="tables">
+        <h2>表在哪里，以及为什么总有一张 <code>d_</code> 表？</h2>
+        <div class="grid2">
+          <div class="card"><h3>hosp：医院范围 EHR</h3><ul><li>行政：patients、admissions、transfers</li><li>收费编码：diagnoses/procedures ICD</li><li>临床：labevents、microbiologyevents、omr</li><li>用药：prescriptions、pharmacy、emar</li></ul></div>
+          <div class="card"><h3>icu：ICU 临床系统</h3><ul><li>encounter：icustays</li><li>观察：chartevents、datetimeevents</li><li>输入/输出：inputevents、outputevents</li><li>治疗：procedureevents</li></ul></div>
+        </div>
+        <p>关系型数据库会把“事件事实”和“概念说明”分开：主表保存紧凑、稳定的代码，字典表保存人类可读描述。这是 database normalisation。</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>事实表</th><th>代码</th><th>字典表</th><th>正确连接键</th></tr></thead>
+          <tbody>
+            <tr><td>diagnoses_icd</td><td>icd_code</td><td>d_icd_diagnoses</td><td><code>icd_code + icd_version</code></td></tr>
+            <tr><td>procedures_icd</td><td>icd_code</td><td>d_icd_procedures</td><td><code>icd_code + icd_version</code></td></tr>
+            <tr><td>labevents</td><td>itemid</td><td>d_labitems</td><td><code>itemid</code></td></tr>
+            <tr><td>chartevents / ICU events</td><td>itemid</td><td>d_items</td><td><code>itemid</code></td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout warn"><strong><code>omr</code> 是本周的反例</strong>它使用自由文本 <code>result_name</code>，没有 itemid、字典表或独立单位列，因此更容易出现 dtype、命名和单位问题。</div>
+      </section>
+
+      <section id="quality">
+        <h2>真实临床数据的四层质量检查</h2>
+        <div class="grid2">
+          <div class="card"><span class="tag">1 · dtype</span><h3>“看起来像数字”不等于数值列</h3><p>OMR 同一列还可能含 <code>120/80</code>，Pandas 因而读取为 object。先显式转换，并决定不可转换值如何处理。</p></div>
+          <div class="card"><span class="tag">2 · missingness</span><h3>缺失通常不是随机噪声</h3><p>医生往往只在有临床理由时测量。变量“是否被测量”本身可能携带病情信息，也可能带来选择偏差。</p></div>
+          <div class="card"><span class="tag">3 · outlier</span><h3>IQR 只是筛查，不是判决</h3><p>5 英寸身高很可能是录入错误；极端化验值却可能是真实危急状态。先回看单位、时间和同患者相邻记录。</p></div>
+          <div class="card"><span class="tag">4 · unit</span><h3>单位错误可以制造“病情突变”</h3><p>97.3 kg 与 214.5 lb 几乎相同。没有机器可读单位时，必须通过范围、同患者轨迹和换算关系核查。</p></div>
+        </div>
+      </section>
+
+      <section id="mistakes">
+        <h2>重点与易错点</h2>
+        <div class="mistakes">
+          <div class="mistake"><b>❌ 用绝对年份比较患者</b><span>✓ 日期按患者独立偏移；同一患者内部时间间隔通常可用，患者之间绝对年份不可直接比较。</span></div>
+          <div class="mistake"><b>❌ 把 91 岁当成准确年龄</b><span>✓ <code>anchor_age=91</code> 只说明患者超过 89 岁。</span></div>
+          <div class="mistake"><b>❌ 只用 icd_code 连接</b><span>✓ 同时连接 <code>icd_version</code>，避免 ICD-9/10 语义错配。</span></div>
+          <div class="mistake"><b>❌ 用 label 当唯一键</b><span>✓ 使用 MIMIC 保证唯一的 <code>itemid</code>；相似 label 可能对应不同 fluid 或概念。</span></div>
+          <div class="mistake"><b>❌ 把 ICD billing code 当入院时特征</b><span>✓ 编码常在出院后生成；用于早期预测会泄漏未来信息。</span></div>
+          <div class="mistake"><b>❌ 把 prescriptions 当实际给药</b><span>✓ prescription 是意图；精确给药应查看 eMAR/eMAR detail，配制/发药看 pharmacy。</span></div>
+          <div class="mistake"><b>❌ 连续相同 careunit 就去重</b><span>✓ 可能是真实换床或物理位置变化；先看时间和 transfer 语义。</span></div>
+          <div class="mistake"><b>❌ 所有患者都应有每类数据</b><span>✓ 缺失可能表示未检查、未进入 ICU、记录在另一 admission，或关联 ID 缺失。</span></div>
+          <div class="mistake"><b>❌ IQR 标记后直接删除</b><span>✓ 标记只是调查入口；先区分真实临床极值、录入错误和单位错误。</span></div>
+          <div class="mistake"><b>❌ 随意 <code>SELECT *</code> 大表</b><span>✓ 特别是 chartevents，先限定列、cohort、stay_id 和时间范围。</span></div>
+          <div class="mistake"><b>❌ 按 admission 拆训练/测试</b><span>✓ 同一患者不同住院可能同时落入两侧；通常应按 <code>subject_id</code> 分组拆分。</span></div>
+          <div class="mistake"><b>❌ 将受限 MIMIC 数据交给商业 LLM</b><span>✓ 课程明确禁止。可以讨论公开 schema 和虚构示例，不要上传受限查询结果或患者记录。</span></div>
+        </div>
+      </section>
+
+      <section id="extension">
+        <h2>把 Tutorial 扩展成研究思维</h2>
+        <div class="grid3">
+          <div class="card"><h3>1. 先定 index time</h3><p>例如“入 ICU 后 6 小时预测 48 小时死亡”。只有 index time 之前已知的数据才能成为特征。</p></div>
+          <div class="card"><h3>2. 先写 cohort SQL</h3><p>先得到一行一个研究样本的 cohort 表，再分别聚合 labs、vitals、medications，最后连接。</p></div>
+          <div class="card"><h3>3. 保存 provenance</h3><p>记录数据版本、表、itemid、单位转换、时间窗口和排除规则，让特征可复现、可审计。</p></div>
+        </div>
+        <h3>推荐的特征工程顺序</h3>
+        <div class="flow">
+          <div class="node"><b>定义 cohort</b>粒度 + 时间点</div><div class="arrow">→</div>
+          <div class="node"><b>提取事件</b>ID + 时间窗口</div><div class="arrow">→</div>
+          <div class="node"><b>标准化</b>dtype + units</div><div class="arrow">→</div>
+          <div class="node"><b>聚合</b>last / min / max / slope</div><div class="arrow">→</div>
+          <div class="node"><b>切分</b>group by patient</div>
+        </div>
+        <div class="callout warn"><strong>缺失指示变量也可能泄漏</strong>“是否测量”确实可能预测病情，但若测量发生在 index time 之后，它仍然是未来信息。任何特征都必须同时审查语义和时间。</div>
+      </section>
+
+      <section id="files">
+        <h2>Ed 文件清单与用途</h2>
+        <p>Week 2 工作区包含两份 Notebook 和 MIMIC-IV Clinical Database Demo 2.2。Demo 数据文件主要给 Notebook 提供本地运行条件；课程项目应优先用 BigQuery，不要求本周逐个分析所有 CSV。</p>
+        <details open><summary>Week 2 Notebooks</summary><ul><li><code>how-to-bigquery.ipynb</code>：正式云端查询模板。</li><li><code>first-look-at-mimic.ipynb</code>：patients/admissions/transfers 案例分析。</li></ul></details>
+        <details><summary>Demo hosp 文件（点击展开）</summary><div class="file-list">
+          <div>admissions.csv.gz</div><div>d_hcpcs.csv.gz</div><div>d_icd_diagnoses.csv.gz</div><div>d_icd_procedures.csv.gz</div><div>d_labitems.csv.gz</div><div>diagnoses_icd.csv.gz</div><div>drgcodes.csv.gz</div><div>emar.csv.gz</div><div>emar_detail.csv.gz</div><div>hcpcsevents.csv.gz</div><div>labevents.csv.gz</div><div>microbiologyevents.csv.gz</div><div>omr.csv.gz</div><div>patients.csv.gz</div><div>pharmacy.csv.gz</div><div>poe.csv.gz</div><div>poe_detail.csv.gz</div><div>prescriptions.csv.gz</div><div>procedures_icd.csv.gz</div><div>provider.csv.gz</div><div>services.csv.gz</div><div>transfers.csv.gz</div>
+        </div></details>
+        <details><summary>Demo icu 文件（点击展开）</summary><div class="file-list">
+          <div>caregiver.csv.gz</div><div>chartevents.csv.gz</div><div>d_items.csv.gz</div><div>datetimeevents.csv.gz</div><div>icustays.csv.gz</div><div>ingredientevents.csv.gz</div><div>inputevents.csv.gz</div><div>outputevents.csv.gz</div><div>procedureevents.csv.gz</div>
+        </div></details>
+        <details><summary>根目录说明文件</summary><div class="file-list"><div>demo_subject_id.csv</div><div>LICENSE.txt</div><div>README.txt</div><div>SHA256SUMS.txt</div></div></details>
+        <details open><summary>Week 3 Notebook</summary><ul><li><code>mimic-data-types.ipynb</code>：临床数据类型、字典表连接、数据质量和 ICU events。</li></ul></details>
+      </section>
+
+      <section id="final">
+        <h2>上完两周后，你应该能回答这些问题</h2>
+        <div class="card">
+          <ol>
+            <li>为什么同一个患者会在 admissions 和 transfers 中出现多行？</li>
+            <li><code>subject_id</code>、<code>hadm_id</code>、<code>stay_id</code> 分别在哪个粒度工作？</li>
+            <li>为什么 diagnoses 必须按 <code>icd_code + icd_version</code> 连接？</li>
+            <li>为什么 <code>itemid</code> 比 label 更适合作为连接键？</li>
+            <li>处方、药房记录和实际给药记录有什么区别？</li>
+            <li>日期偏移后，什么时间信息仍能使用，什么不能直接比较？</li>
+            <li>为什么缺失值和测量行为本身可能具有临床含义？</li>
+            <li>如何区分真实极端值、录入错误与单位错误？</li>
+            <li>做早期预测时，为什么 billing codes 可能造成 target leakage？</li>
+            <li>如何在 BigQuery 中限制大型 chartevents 查询的范围？</li>
+          </ol>
+        </div>
+        <div class="callout danger"><strong>一句话总复习</strong>Week 2 教你沿 ID 找到正确的患者历程；Week 3 教你沿代码和时间找到正确的临床含义，并在建模前质疑数据是否真实、可比且在预测时可用。</div>
+      </section>
+    </main>
+  </div>
+  <footer>内容依据当前 Ed 课程页面中的 Week 2 两份 Notebook、文件树，以及 Week 3 <code>mimic-data-types.ipynb</code> 整理。未运行、复制或展示受限 MIMIC 患者数据；示例 ID 仅用于说明课程既有教学流程。</footer>
+</body>
+</html>

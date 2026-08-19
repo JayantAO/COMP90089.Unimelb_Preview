@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>COMP90089 Tutorial｜AKI 数字表型学习笔记</title>
+  <style>
+    :root{--ink:#18212b;--muted:#5e6c79;--paper:#f5f3ed;--card:#fffdf8;--purple:#51247a;--violet:#76509b;--blue:#176b87;--teal:#087f72;--amber:#b35b00;--red:#b42318;--line:#ddd7ca;--shadow:0 10px 30px rgba(38,25,50,.08)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.72 Inter,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}a{color:var(--purple)}code{font-family:"Cascadia Code",Consolas,monospace;background:#eee9f2;color:#3e2155;padding:.12em .36em;border-radius:5px;font-size:.92em}pre{margin:12px 0;overflow:auto;background:#1e1725;color:#f2eaf8;padding:18px;border-radius:12px;line-height:1.55;font-size:.88rem}pre code{background:none;color:inherit;padding:0}
+    .hero{padding:62px 7vw 56px;color:#fff;background:radial-gradient(circle at 86% 10%,rgba(255,255,255,.14),transparent 24%),linear-gradient(120deg,#24102f,#51247a 58%,#176b87);position:relative;overflow:hidden}.hero:after{content:"Cr";position:absolute;right:6vw;bottom:-48px;font:900 230px/1 Georgia,serif;color:rgba(255,255,255,.055)}.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#e9dff0}.hero h1{font-size:clamp(2.3rem,5.5vw,4.7rem);line-height:1.03;margin:.38rem 0 1rem;max-width:970px}.hero p{font-size:1.13rem;max-width:900px;color:#eee6f3}.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.chip{padding:5px 11px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(255,255,255,.08);font-size:.86rem}
+    .layout{max-width:1280px;margin:auto;padding:38px 28px 90px;display:grid;grid-template-columns:265px minmax(0,930px);gap:40px}nav{position:sticky;top:20px;align-self:start;padding:19px;background:var(--card);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}nav b{display:block;color:var(--purple);margin-bottom:8px}nav a{display:block;text-decoration:none;color:#455363;padding:5px 0;font-size:.91rem}nav a:hover{color:var(--purple)}main{min-width:0}section{margin-bottom:48px;scroll-margin-top:22px}h2{font-size:1.9rem;line-height:1.25;color:#321747;margin:0 0 18px}h3{font-size:1.2rem;color:#43265a;margin:25px 0 9px}p{margin:.55rem 0 1rem}.lead{font-size:1.13rem;color:#455363}.card,.callout{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:21px 23px;box-shadow:var(--shadow)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.metric{border-top:5px solid var(--purple)}.metric:nth-child(2){border-color:var(--blue)}.metric:nth-child(3){border-color:var(--teal)}.metric .num{font-size:2rem;font-weight:900;color:var(--purple)}.metric:nth-child(2) .num{color:var(--blue)}.metric:nth-child(3) .num{color:var(--teal)}.metric h3{margin:3px 0 8px}.metric p{margin:0}
+    .callout{box-shadow:none;border-left:5px solid var(--blue);margin:18px 0}.callout strong{display:block}.warn{border-left-color:var(--amber);background:#fff8e9}.danger{border-left-color:var(--red);background:#fff4f2}.good{border-left-color:var(--teal);background:#effaf7}.flow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:18px 0}.node{flex:1 1 135px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;box-shadow:0 5px 15px rgba(20,20,30,.04)}.node b{display:block;color:var(--purple)}.arrow{color:var(--purple);font-weight:900;font-size:1.35rem}
+    .tasks{counter-reset:task;list-style:none;padding:0}.tasks li{counter-increment:task;position:relative;margin:10px 0;padding:15px 15px 15px 54px;border:1px solid var(--line);border-radius:12px;background:#faf8f3}.tasks li:before{content:counter(task);position:absolute;left:14px;top:14px;width:28px;height:28px;line-height:28px;text-align:center;border-radius:50%;color:#fff;background:var(--purple);font-weight:800}.tasks li b{color:#35194b}.tag{display:inline-block;border-radius:999px;padding:3px 8px;font-size:.76rem;font-weight:800;background:#e9e0f0;color:#4b246b;margin-right:5px}.tag.do{background:#dff5ef;color:#07665d}.tag.warn{background:#fde8c5;color:#874400;border:0}
+    table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden;font-size:.93rem}th,td{text-align:left;vertical-align:top;padding:11px 13px;border-bottom:1px solid var(--line)}th{background:#ece5f1;color:#371b4e}tr:last-child td{border-bottom:0}.table-wrap{overflow:auto;border-radius:13px}.mistakes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mistake{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px}.mistake b{display:block;color:var(--red)}.mistake span{display:block;color:var(--teal);margin-top:5px}.formula{font:700 1.12rem/1.6 Georgia,"Times New Roman",serif;background:#f0ecf3;border-radius:12px;text-align:center;padding:18px;margin:14px 0}.small{font-size:.9rem;color:var(--muted)}details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:12px 16px}summary{cursor:pointer;font-weight:800;color:#402256}ul,ol{padding-left:1.35rem}li{margin:.42rem 0}.done{color:var(--teal);font-weight:800}.todo{color:var(--amber);font-weight:800}
+    footer{background:#21152c;color:#ddd2e5;padding:28px 7vw;font-size:.9rem}@media(max-width:900px){.layout{grid-template-columns:1fr;padding:27px 18px 70px}nav{position:relative;top:0}.grid2,.grid3,.mistakes{grid-template-columns:1fr}.arrow{display:none}.hero{padding:48px 24px}}@media print{nav{display:none}.layout{display:block;max-width:none}.hero{background:#eee;color:#111;padding:28px}.hero p,.eyebrow{color:#333}.card{box-shadow:none}section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">COMP90089 · Tutorial Notes</div>
+    <h1>AKI Digital Phenotyping<br>急性肾损伤数字表型</h1>
+    <p>把临床诊断规则转化为可执行的数据算法：定位变量、统一单位、构建时间窗口、按患者聚合，并用 OR 逻辑生成最终 cohort。</p>
+    <div class="chips"><span class="chip">Ed Notebook: aki-digital-phenotype.ipynb</span><span class="chip">MIMIC-IV Demo</span><span class="chip">KDIGO criteria</span><span class="chip">整理日期：2026-08-19</span></div>
+  </header>
+
+  <div class="layout">
+    <nav><b>快速目录</b><a href="#goal">本周目标</a><a href="#criteria">三项 AKI 标准</a><a href="#tasks">必须完成的练习</a><a href="#method">整体方法</a><a href="#c1">标准 1</a><a href="#c2">标准 2</a><a href="#c3">标准 3 详解</a><a href="#combine">合并 cohort</a><a href="#knowledge">知识点</a><a href="#mistakes">易错点</a><a href="#checklist">提交前自检</a></nav>
+
+    <main>
+      <section id="goal">
+        <h2>这周想让你掌握什么？</h2>
+        <p class="lead">核心不是背 AKI 定义，而是学会做 <b>digital phenotyping</b>：将自然语言临床标准精确拆解成数据库字段、单位、时间窗口与布尔判断，从海量 EHR 事件中可重复地识别患者 cohort。</p>
+        <div class="flow"><div class="node"><b>临床定义</b>KDIGO</div><div class="arrow">→</div><div class="node"><b>变量定位</b>d_items</div><div class="arrow">→</div><div class="node"><b>事件提取</b>chart/output</div><div class="arrow">→</div><div class="node"><b>时间窗口</b>48h / 7d / 6h</div><div class="arrow">→</div><div class="node"><b>Cohort</b>患者集合</div></div>
+        <div class="grid2"><div class="card"><h3>Notebook 已演示</h3><p><span class="done">✓</span> 肌酐标准 1 与标准 2：如何找 itemid、清洗数值、按患者分组、比较窗口内历史测量。</p></div><div class="card"><h3>你需要完成</h3><p><span class="todo">●</span> 标准 3：体重 + 尿量 + 6 小时滑动窗口；最后把三组患者去重合并。</p></div></div>
+      </section>
+
+      <section id="criteria">
+        <h2>KDIGO 的三项 AKI 判定标准</h2>
+        <div class="grid3">
+          <article class="card metric"><div class="num">①</div><h3>48 小时肌酐升高</h3><p>Serum creatinine 在 48 小时内上升 <b>≥ 0.3 mg/dL</b>（≥ 26.5 μmol/L）。</p></article>
+          <article class="card metric"><div class="num">②</div><h3>7 天相对基线升高</h3><p>Serum creatinine 达到此前 7 天 baseline 的 <b>≥ 1.5 倍</b>。</p></article>
+          <article class="card metric"><div class="num">③</div><h3>持续低尿量</h3><p>Urine output <b>&lt; 0.5 mL/kg/h</b>，持续 <b>6 小时</b>。</p></article>
+        </div>
+        <div class="callout good"><strong>最终 AKI cohort 使用 OR，而不是 AND</strong>任何一项标准成立即可判定为 AKI；同一患者可能同时满足多个标准，所以最终必须取集合并集并去重。</div>
+      </section>
+
+      <section id="tasks">
+        <h2>你实际需要完成的练习</h2>
+        <p>Ed Notebook 中真正留空的部分如下。建议先自己填写，再按本页“解题提示”核对。</p>
+        <ol class="tasks">
+          <li><span class="tag do">Cell 13</span><b>填写两个体重 itemid</b>：lbs 为 <code>226531</code>，kg 为 <code>226512</code>。</li>
+          <li><span class="tag do">Cell 14</span><b>把磅转换成公斤</b>：对 lbs 数值乘 <code>0.453592</code>，再与 kg 记录纵向合并。</li>
+          <li><span class="tag do">Cell 18</span><b>提取尿量事件</b>：在 <code>outputevents</code> 中用给定 itemid 列表过滤，并用 <code>pd.to_numeric(..., errors='coerce')</code> 转换数值。</li>
+          <li><span class="tag do">Cell 19</span><b>补全标准 3 函数</b>：获得患者体重；逐个时间点取过去 6 小时尿量；求和；除以体重与 6 小时；判断是否低于 0.5。</li>
+          <li><span class="tag do">Cell 24</span><b>按患者运行标准 3</b>：筛选有有效体重且有尿量的患者；<code>groupby</code> + <code>apply</code>；取得 <code>criterion3_met=True</code> 的唯一患者列表。</li>
+          <li><span class="tag do">Cell 25</span><b>合并最终 cohort</b>：将三项患者列表做集合并集，保证每个 <code>subject_id</code> 只出现一次。</li>
+          <li><span class="tag warn">核对</span><b>运行全部单元并解释结果</b>：不能只让代码不报错；还要说明各标准人数、重叠人数、缺失体重处理和时间窗口假设。</li>
+        </ol>
+      </section>
+
+      <section id="method">
+        <h2>从临床语言到代码：通用拆解法</h2>
+        <div class="table-wrap"><table><thead><tr><th>临床短语</th><th>数据问题</th><th>Notebook 中的实现</th></tr></thead><tbody>
+          <tr><td>“serum creatinine”</td><td>它对应哪个字段？</td><td>在 <code>d_items.label</code> 搜索，确认 <code>itemid=220615</code> 且 <code>linksto=chartevents</code></td></tr>
+          <tr><td>“rises by ≥ 0.3”</td><td>比较哪些测量？</td><td>当前值减去此前 48 小时内的任一值</td></tr>
+          <tr><td>“1.5 times baseline”</td><td>baseline 如何定义？</td><td>此前 7 天内的历史值；若当前值 ≥ 任一历史值×1.5，则相对于最低值也成立</td></tr>
+          <tr><td>“mL/kg/h”</td><td>分子、分母与单位来自哪里？</td><td>尿量来自 <code>outputevents</code>；体重来自 <code>chartevents</code>；lbs 转 kg；总量再除以 kg 与小时</td></tr>
+          <tr><td>“for 6 hours”</td><td>时间窗如何定义？</td><td>以当前时间为窗口终点，聚合过去 6 小时；并验证确有完整 6 小时覆盖</td></tr>
+        </tbody></table></div>
+      </section>
+
+      <section id="c1">
+        <h2>标准 1：48 小时内肌酐上升 ≥ 0.3</h2>
+        <ol><li>从 <code>d_items</code> 找到 serum creatinine 的 <code>itemid=220615</code>。</li><li>从 <code>chartevents</code> 提取该 itemid。</li><li>将 <code>value</code> 转成 numeric，无法转换的值变成 NaN。</li><li>只保留至少两次测量的患者。</li><li>每位患者按 <code>charttime</code> 排序；对每个当前值，查过去 48 小时内所有更早测量。</li><li>只要存在 <code>current - prior ≥ 0.3</code>，返回 True。</li></ol>
+        <div class="callout"><strong>为什么不是只比较相邻两次？</strong>真正标准关心 48 小时窗口内任意有效基线。只比相邻记录可能错过“第一次数值很低、第二次略升、第三次再升”的累计变化。</div>
+      </section>
+
+      <section id="c2">
+        <h2>标准 2：7 天内达到 baseline 的 ≥ 1.5 倍</h2>
+        <ol><li>复用已清洗且至少两次测量的 creatinine 数据。</li><li>按患者、时间排序。</li><li>对当前测量查找严格早于它、且位于此前 7 天的测量。</li><li>判断是否存在 <code>current ≥ 1.5 × prior</code>。</li></ol>
+        <div class="callout warn"><strong>“baseline”必须写进方法说明</strong>Notebook 将 prior 7 days 中任一较低历史值作为比较对象；概念上等价于与该窗口最低值比较。真实研究中 baseline 的定义可能更复杂，必须预先规定并报告。</div>
+      </section>
+
+      <section id="c3">
+        <h2>标准 3：尿量 &lt; 0.5 mL/kg/h 持续 6 小时</h2>
+        <h3>1. 准备体重</h3>
+        <pre><code>weight_lbs_item_id = 226531
+weight_kg_itemid = 226512
+
+weight_lbs['value'] = pd.to_numeric(weight_lbs['value'], errors='coerce')
+weight_lbs['value'] = weight_lbs['value'] * 0.453592
+weight = pd.concat([weight_kg, weight_lbs], ignore_index=True)</code></pre>
+        <p class="small">合并前建议保留统一单位列（例如 <code>weight_kg</code>）而不是继续叫模糊的 <code>value</code>，并排除 NaN、0 或明显不合理体重。</p>
+        <h3>2. 准备尿量</h3>
+        <pre><code>urine_output = outputevents[
+    outputevents['itemid'].isin(urine_output_itemids)
+].copy()
+urine_output['value'] = pd.to_numeric(
+    urine_output['value'], errors='coerce'
+)</code></pre>
+        <p>不要仅搜索 label 中的 “urine”。课程给出的多个 itemid 才是临床专家确认的相关来源；这是“一个临床概念分散在多个源字段”的典型例子。</p>
+        <h3>3. 计算 6 小时标准</h3>
+        <div class="formula">尿量速率 = 过去 6 小时尿量总和 (mL) ÷ 体重 (kg) ÷ 6 (h)</div>
+        <pre><code># 对每位患者/ICU stay：
+x = x.sort_values('charttime')
+
+for each current_time:
+    previous = x[
+        (x.charttime &gt; current_time - 6 hours) &amp;
+        (x.charttime &lt;= current_time)
+    ]
+    total_ml = previous.value.sum()
+    rate = total_ml / patient_weight_kg / 6
+    if rate &lt; 0.5:
+        return True
+return False</code></pre>
+        <div class="callout danger"><strong>必须处理 Notebook 中的时间方向不一致</strong>函数 docstring 写的是“look at the next 6 hours”，但代码注释写“previous 6 hours”。更自然且避免使用未来信息的实现，是以当前时刻为窗口终点查看过去 6 小时；无论选择哪一种，文字、边界和代码必须完全一致。</div>
+        <div class="callout warn"><strong>还要验证窗口真的覆盖 6 小时</strong>仅有一次很小的尿量记录时，直接除以 6 会制造假阳性。稳健做法是要求窗口跨度接近 6 小时，或建立规则时间网格并明确“无记录”代表 0 还是 missing。EHR 中未记录不自动等于零尿量。</div>
+        <h3>4. 体重如何选？</h3>
+        <p>Notebook 建议使用“most recent weight”。实现时应尽量选在判定窗口开始前或附近的最近有效体重，避免使用未来体重。若按患者全记录简单取最后一条，可能把另一住院的体重用于当前 ICU episode。</p>
+      </section>
+
+      <section id="combine">
+        <h2>合并三项标准得到最终 cohort</h2>
+        <pre><code>final_cohort = sorted(set(
+    aki_patients_criterion1
+    + aki_patients_criterion2
+    + aki_patients_criterion3
+))</code></pre>
+        <p>或者使用集合并集：</p>
+        <pre><code>final_cohort = sorted(
+    set(aki_patients_criterion1)
+    | set(aki_patients_criterion2)
+    | set(aki_patients_criterion3)
+)</code></pre>
+        <div class="callout good"><strong>为什么必须用 set？</strong>患者可能同时满足两项或三项标准。直接拼接列表会重复计数，而 cohort 通常要求一个患者只出现一次。</div>
+      </section>
+
+      <section id="knowledge">
+        <h2>这周涉及的知识点</h2>
+        <div class="grid2">
+          <div class="card"><h3>数字表型</h3><p>把疾病的临床定义转化为可复现的计算规则。每个词都要对应数据字段、单位、时间与逻辑。</p></div>
+          <div class="card"><h3>关系型数据库与字典表</h3><p><code>chartevents/outputevents</code> 保存事实；<code>d_items</code> 将 <code>itemid</code> 翻译成 label、来源表和参考范围。</p></div>
+          <div class="card"><h3>事件数据与时间窗口</h3><p>先排序，再明确当前/历史、开闭边界、时间方向；48h、7d、6h 不能只按“行数”近似。</p></div>
+          <div class="card"><h3>Pandas 分组计算</h3><p><code>groupby</code>、<code>filter</code>、<code>apply</code>、布尔过滤、<code>isin</code>、<code>concat</code>、<code>nunique</code>。</p></div>
+          <div class="card"><h3>单位标准化</h3><p>lbs × 0.453592 → kg；只有单位统一后，mL/kg/h 才有物理意义。</p></div>
+          <div class="card"><h3>Cohort 与集合逻辑</h3><p>单项标准产生患者集合；最终疾病定义是集合并集。交集可用于分析不同标准的重叠。</p></div>
+          <div class="card"><h3>领域专家协作</h3><p>关键词搜索未必找到正确 urine output 项目。临床专家帮助确认概念与源字段，数据人员负责将规则显式化。</p></div>
+          <div class="card"><h3>数据质量与缺失</h3><p>字符串数值、NaN、错误单位、缺失体重、稀疏记录都会改变标签，不能把“代码能跑”当成“表型正确”。</p></div>
+        </div>
+      </section>
+
+      <section id="mistakes">
+        <h2>重点与易错点</h2>
+        <div class="mistakes">
+          <div class="mistake"><b>❌ 只在 label 搜索 “urine”</b><span>✓ 临床概念可能分散在多个并不直观的 itemid；使用经领域确认的列表。</span></div>
+          <div class="mistake"><b>❌ lbs 和 kg 直接拼接</b><span>✓ 先统一为 kg，并保留单位转换记录。</span></div>
+          <div class="mistake"><b>❌ 把 value 当成天然数值</b><span>✓ 使用 <code>pd.to_numeric(errors='coerce')</code>，随后检查 NaN。</span></div>
+          <div class="mistake"><b>❌ 未按时间排序</b><span>✓ 所有窗口计算前按 <code>charttime</code> 排序。</span></div>
+          <div class="mistake"><b>❌ 只比较相邻肌酐</b><span>✓ 标准 1 要检查 48 小时内所有有效历史测量。</span></div>
+          <div class="mistake"><b>❌ 当前测量被当作 baseline</b><span>✓ 历史筛选必须严格 <code>charttime &lt; current_time</code>。</span></div>
+          <div class="mistake"><b>❌ 不满 6 小时也除以 6</b><span>✓ 检查窗口覆盖和测量完整性，否则会高估低尿量。</span></div>
+          <div class="mistake"><b>❌ 缺失尿量等于 0</b><span>✓ 未记录可能是 missing；除非有可靠采集机制，不应自动视为无尿。</span></div>
+          <div class="mistake"><b>❌ 使用患者未来/其他住院体重</b><span>✓ 优先使用同一 stay 且判定前最近的有效体重。</span></div>
+          <div class="mistake"><b>❌ 按 subject_id 混合所有 episode</b><span>✓ 教学代码按患者简化；严谨研究宜先按 <code>stay_id</code> 或 admission 定义 episode，再汇总到患者。</span></div>
+          <div class="mistake"><b>❌ 三个标准取交集</b><span>✓ AKI 是满足任意一项，因此取并集。</span></div>
+          <div class="mistake"><b>❌ 把受限数据上传商业 LLM</b><span>✓ 只讨论公开 schema、课程逻辑或虚构示例；遵守 MIMIC DUA。</span></div>
+        </div>
+      </section>
+
+      <section id="checklist">
+        <h2>完成练习的推荐顺序与自检</h2>
+        <ol class="tasks">
+          <li>先 Run All 到 Cell 12，确认数据路径、<code>chartevents</code>、<code>d_items</code> 与前两项结果正常。</li>
+          <li>填写体重 itemid 和单位转换；检查合并后体重的范围、NaN 与患者覆盖率。</li>
+          <li>从 <code>outputevents</code> 提取给定尿量 itemid；检查单位确为 mL、时间列为 datetime。</li>
+          <li>先拿一位患者手算一个 6 小时窗口，再实现函数，确保代码结果与手算一致。</li>
+          <li>处理缺失体重、零/负体重、NaN 尿量和窗口不足 6 小时。</li>
+          <li>按患者（更严谨时按 stay）运行函数，生成 criterion 3 患者列表。</li>
+          <li>用集合并集合并三项；打印各项人数、最终唯一人数和标准间重叠。</li>
+          <li>重新 Run All，确认从空 kernel 也可复现；保存 Notebook，再按课程要求 Submit。</li>
+        </ol>
+        <div class="callout"><strong>你应当能口头解释</strong>为什么需要字典表、为什么尿量要除以体重和时间、窗口边界如何定义、为什么三项取并集，以及缺失记录为何可能改变标签。</div>
+      </section>
+    </main>
+  </div>
+  <footer>依据当前 Ed 页面 “Digital phenotyping of patients with AKI” 与 <code>aki-digital-phenotype.ipynb</code> 整理。页面只总结课程教学逻辑与公开字段结构，没有运行或展示受限 MIMIC 患者数据。医学标准仅用于课程学习，不构成临床诊断建议。</footer>
+</body>
+</html>
